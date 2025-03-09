@@ -1,0 +1,41 @@
+<!-- Task 1: Base HTML Structure -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Ticket System</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
+    header, footer { background: #eee; padding: 10px; text-align: center; }
+    main { margin: 20px 0; }
+    .support-ticket {
+      padding: 10px;
+      margin: 10px;
+      background: #f4f4f4;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .highlight { border: 2px solid red; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Support Ticket System</h1>
+    <p>Manage support requests.</p>
+  </header>
+  <main>
+    <!-- Container for support tickets -->
+    <div id="ticketContainer"></div>
+    <!-- Button to add a ticket (for testing) -->
+    <button onclick="createTicket('Alice Johnson', 'Cannot login', 'High')">Add Ticket</button>
+    <!-- Button to highlight high priority tickets -->
+    <button onclick="highlightHighPriorityTickets()">Highlight High Priority Tickets</button>
+  </main>
+  <footer>
+    <p>© 2025 Your Company.</p>
+  </footer>
+  <script src="cc_14.js"></script>
+</body>
+</html>

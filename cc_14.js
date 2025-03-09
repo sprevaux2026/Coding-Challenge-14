@@ -35,6 +35,11 @@ function createTicket(customerName, issueDescription, priority) {
     ticket.appendChild(issuePara);
     ticket.appendChild(priorityLabel);
     ticket.appendChild(resolveBtn);
+
+     //Add double-click to enable inline editing (task 5)
+  ticket.addEventListener('dblclick', function() {
+    inlineEditTicket(ticket, nameHeading, issuePara, priorityLabel);
+  });
   
     // Add the ticket to the container
     document.getElementById('ticketContainer').appendChild(ticket);
@@ -51,4 +56,73 @@ function highlightHighPriorityTickets() {
 document.getElementById('ticketContainer').addEventListener('click', function(event) {
     console.log('Ticket clicked:', event.target);
   });
+  // Task 5: Inline Editing for Support Tickets
+function inlineEditTicket(ticket, nameHeading, issuePara, priorityLabel) {
+    // Create inputs pre-filled with current values
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.value = nameHeading.textContent;
+  
+    const issueInput = document.createElement('input');
+    issueInput.type = 'text';
+    issueInput.value = issuePara.textContent;
+  
+    const priorityInput = document.createElement('input');
+    priorityInput.type = 'text';
+    // Remove "Priority: " to get just the priority text
+    priorityInput.value = priorityLabel.textContent.replace('Priority: ', '');
+  
+    // Create a Save button
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent = 'Save';
+  
+    // Clear the ticket's current static content
+    ticket.innerHTML = '';
+  
+    // Add input fields and the Save button to the ticket
+    ticket.appendChild(nameInput);
+    ticket.appendChild(issueInput);
+    ticket.appendChild(priorityInput);
+    ticket.appendChild(saveBtn);
+  
+    // Re-create the Resolve button so the ticket can still be removed
+    const resolveBtn = document.createElement('button');
+    resolveBtn.textContent = 'Resolve';
+    resolveBtn.addEventListener('click', function(event) {
+      event.stopPropagation();
+      ticket.parentElement.removeChild(ticket);
+    });
+    ticket.appendChild(resolveBtn);
+  
+    // When Save is clicked, update the ticket with new static content
+    saveBtn.addEventListener('click', function() {
+      const updatedName = nameInput.value;
+      const updatedIssue = issueInput.value;
+      const updatedPriority = priorityInput.value;
+  
+      // Clear the ticket to remove input fields
+      ticket.innerHTML = '';
+  
+      // Create new elements with updated values
+      const updatedNameHeading = document.createElement('h3');
+      updatedNameHeading.textContent = updatedName;
+      const updatedIssuePara = document.createElement('p');
+      updatedIssuePara.textContent = updatedIssue;
+      const updatedPriorityLabel = document.createElement('span');
+      updatedPriorityLabel.textContent = 'Priority: ' + updatedPriority;
+  
+      // If priority is still high, keep it marked
+      if (updatedPriority.toLowerCase() === 'high') {
+        ticket.classList.add('high-priority');
+      } else {
+        ticket.classList.remove('high-priority');
+      }
+  
+      // Append updated content and the Resolve button
+      ticket.appendChild(updatedNameHeading);
+      ticket.appendChild(updatedIssuePara);
+      ticket.appendChild(updatedPriorityLabel);
+      ticket.appendChild(resolveBtn);
+    });
+  }
   

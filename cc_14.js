@@ -39,4 +39,12 @@ function createTicket(customerName, issueDescription, priority) {
     // Add the ticket to the container
     document.getElementById('ticketContainer').appendChild(ticket);
   }
+  // Task 3: Highlight High Priority Tickets
+function highlightHighPriorityTickets() {
+    const tickets = document.querySelectorAll('.high-priority');
+    // Loop through each ticket and add the 'highlight' class
+    Array.from(tickets).forEach(ticket => {
+      ticket.classList.add('highlight');
+    });
+  }
   

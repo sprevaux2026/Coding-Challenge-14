@@ -47,4 +47,8 @@ function highlightHighPriorityTickets() {
       ticket.classList.add('highlight');
     });
   }
+  // Task 4: Log clicks on the ticket container (except for Resolve button clicks)
+document.getElementById('ticketContainer').addEventListener('click', function(event) {
+    console.log('Ticket clicked:', event.target);
+  });
   
